@@ -31,7 +31,7 @@ Convert::Convert(ros::NodeHandle node, ros::NodeHandle private_nh)
   tranz_4.translation() << 0,0,1;
   tranz_4.rotate(Eigen::AngleAxisf(-M_PI/2,Eigen::Vector3f::UnitZ()));
   
-  // subscribe to rslidarScan packets
+  // 	subscribe to rslidarScan packets
   rslidar_scan_.push_back(node.subscribe("dev1", 1, &Convert::processScan1,(Convert *)this, ros::TransportHints().tcpNoDelay(true)));
   rslidar_scan_.push_back(node.subscribe("dev2", 1, &Convert::processScan2,(Convert *)this, ros::TransportHints().tcpNoDelay(true)));
   rslidar_scan_.push_back(node.subscribe("dev3", 1, &Convert::processScan3,(Convert *)this, ros::TransportHints().tcpNoDelay(true)));

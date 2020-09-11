@@ -56,7 +56,7 @@
     <remap from="cloud_in" to="/combined"/>
   </node>
   
-  <node name="GridNode" type="grider" pkg="myGrid">
-    <remap from="/unGrided" to="/combined/">
+  <node name="grider" type="grider" pkg="mygrid" output="screen">
+    <remap from="unGrided" to="/combined/"/>
   </node>
 </launch>
