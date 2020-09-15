@@ -8,6 +8,8 @@ add_message_files(
   FILES
   rslidarPacket.msg
   rslidarScan.msg
+  rslidarPacket_bp.msg
+  rslidarScan_bp.msg
 )
 generate_messages(DEPENDENCIES std_msgs)
 

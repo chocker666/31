@@ -45,18 +45,5 @@
   </node>
 
   <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find rslidar_pointcloud)/rviz_cfg/rslidar.rviz" />
-  
-  <node name="octomap_server" type="octomap_server_node" pkg="octomap_server">
-    <param name="resolution" value="0.1"/>
-    <param name="frame_id" type="string" value="rslidar"/>
-    <param name="sensor_model/max_range" value="150.0"/>
-    <param name="latch" value="true"/>
-    <param name="pointcloud_max_z" value="2"/>
-    <param name="pointcloud_min_z" value="-2"/>
-    <remap from="cloud_in" to="/combined"/>
-  </node>
-  
-  <node name="grider" type="grider" pkg="mygrid" output="screen">
-    <remap from="unGrided" to="/combined/"/>
-  </node>
+
 </launch>
