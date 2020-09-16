@@ -1,0 +1,49 @@
+<launch>
+
+  <node  name="rslidar_node1" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+    <param name="model" value="MEMS"/>
+    <param name="pcap" value="/home/rob/Downloads/111.pcap"/>
+    <param name="location" value="dev1"/>
+    <param name="device_ip" value="192.168.1.200"/>
+    <param name="start_from_edge" value="true"/>
+  </node>
+  
+
+  <node  name="rslidar_node2" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+    <param name="model" value="MEMS"/>
+    <param name="location" value="dev2"/>
+    <param name="device_ip" value="192.168.1.200"/>
+    <param name="pcap" value="/home/rob/Downloads/222.pcap"/>
+    <param name="start_from_edge" value="true"/>
+  </node>
+
+
+  <node  name="rslidar_node3" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+    <param name="model" value="MEMS"/>
+    <param name="location" value="dev3"/>
+    <param name="device_ip" value="192.168.1.200"/>
+    <param name="pcap" value="/home/rob/Downloads/333.pcap"/>
+    <param name="start_from_edge" value="true"/>
+  </node>
+
+
+  <node  name="rslidar_node4" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+    <param name="model" value="MEMS"/>
+    <param name="location" value="dev4"/>
+    <param name="device_ip" value="192.168.1.200"/>
+    <param name="port" value="6699"/>
+    <param name="start_from_edge" value="true"/>
+  </node>
+  
+  
+  <node pkg="rslidar_pointcloud" type="cloud_node" output="screen" name="cloud_node">
+    <param name="model" value="MEMS"/>
+    <param name="dev_list" value=""/>
+    <param name="channel_path" value="$(find rslidar_pointcloud)/data/rs_lidar_m6/ChannelNum.csv" />
+    <param name="limit_path" value="$(find rslidar_pointcloud)/data/rs_lidar_m6/limit.csv" />
+    <param name="slow_path" value="$(find rslidar_pointcloud)/data/rs_lidar_m6/real_slow_axis.csv" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find rslidar_pointcloud)/rviz_cfg/rslidar.rviz" />
+
+</launch>
