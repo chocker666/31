@@ -18,6 +18,15 @@
 #include <rslidar_pointcloud/CloudNodeConfig.h>
 #include "rawdata_bp.h"
 
+
+pcl::PointCloud<pcl::PointXYZI> combined_cloud_bp;
+Eigen::Affine3f tranz_4 = Eigen::Affine3f::Identity();
+Eigen::Affine3f tranz_5 = Eigen::Affine3f::Identity();
+Eigen::Affine3f tranz_6 = Eigen::Affine3f::Identity();
+
+pcl::PointCloud<pcl::PointXYZI>::Ptr dev4_points(new pcl::PointCloud<pcl::PointXYZI>);
+pcl::PointCloud<pcl::PointXYZI>::Ptr dev5_points(new pcl::PointCloud<pcl::PointXYZI>);
+pcl::PointCloud<pcl::PointXYZI>::Ptr dev6_points(new pcl::PointCloud<pcl::PointXYZI>);
 namespace rslidar_pointcloud
 {
 class Convert
@@ -32,13 +41,15 @@ public:
 private:
   void callback(rslidar_pointcloud::CloudNodeConfig& config, uint32_t level);
 
-  void processScan(const rslidar_msgs::rslidarScan_bp::ConstPtr& scanMsg);
-
+  void processScan4(const rslidar_msgs::rslidarScan_bp::ConstPtr& scanMsg);
+  void processScan5(const rslidar_msgs::rslidarScan_bp::ConstPtr& scanMsg);
+  void processScan6(const rslidar_msgs::rslidarScan_bp::ConstPtr& scanMsg);
+  void combined_pubber();
   /// Pointer to dynamic reconfigure service srv_
   boost::shared_ptr<dynamic_reconfigure::Server<rslidar_pointcloud::CloudNodeConfig> > srv_;
 
   boost::shared_ptr<rslidar_rawdata::RawData> data_;
-  ros::Subscriber rslidar_scan_;
+  std::vector<ros::Subscriber> rslidar_scan_;
   ros::Publisher output_;
 };
 

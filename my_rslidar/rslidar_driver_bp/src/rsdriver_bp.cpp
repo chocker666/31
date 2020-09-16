@@ -120,10 +120,18 @@ rslidarDriver::rslidarDriver(ros::NodeHandle node, ros::NodeHandle private_nh)
   diag_min_freq_ = diag_freq;
   // ROS_INFO("expected frequency: %.3f (Hz)", diag_freq);
 
+
+
+
+  std::string topic_name;
+  private_nh.param("location", topic_name, std::string(""));  
   using namespace diagnostic_updater;
-  diag_topic_.reset(new TopicDiagnostic("rslidar_packets", diagnostics_,
+  diag_topic_.reset(new TopicDiagnostic(topic_name, diagnostics_,
                                         FrequencyStatusParam(&diag_min_freq_, &diag_max_freq_, 0.1, 10),
                                         TimeStampStatusParam()));
+
+
+
 
   // open rslidar input device or file
   if (dump_file != "")  // have PCAP file?
@@ -140,13 +148,8 @@ rslidarDriver::rslidarDriver(ros::NodeHandle node, ros::NodeHandle private_nh)
   }
 
   // raw packet output topic
-  std::string output_packets_topic;
-  private_nh.param("output_packets_topic", output_packets_topic, std::string("rslidar_packets"));
-  msop_output_ = node.advertise<rslidar_msgs::rslidarScan_bp>(output_packets_topic, 10);
-
-  std::string output_difop_topic;
-  private_nh.param("output_difop_topic", output_difop_topic, std::string("rslidar_packets_difop"));
-  difop_output_ = node.advertise<rslidar_msgs::rslidarPacket_bp>(output_difop_topic, 10);
+  msop_output_ = node.advertise<rslidar_msgs::rslidarScan_bp>(topic_name, 10);
+  difop_output_ = node.advertise<rslidar_msgs::rslidarPacket_bp>(topic_name, 10);
 
   difop_thread_ = boost::shared_ptr<boost::thread>(new boost::thread(boost::bind(&rslidarDriver::difopPoll, this)));
 

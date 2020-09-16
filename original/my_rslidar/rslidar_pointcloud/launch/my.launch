@@ -1,0 +1,62 @@
+<launch>
+
+  <node  name="rslidar_node1" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+    <param name="model" value="MEMS"/>
+    <param name="pcap" value="/home/rob/Downloads/111.pcap"/>
+    <param name="location" value="dev1"/>
+    <param name="device_ip" value="192.168.1.200"/>
+    <param name="start_from_edge" value="true"/>
+  </node>
+  
+
+  <node  name="rslidar_node2" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+    <param name="model" value="MEMS"/>
+    <param name="location" value="dev2"/>
+    <param name="device_ip" value="192.168.1.200"/>
+    <param name="pcap" value="/home/rob/Downloads/222.pcap"/>
+    <param name="start_from_edge" value="true"/>
+  </node>
+
+
+  <node  name="rslidar_node3" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+    <param name="model" value="MEMS"/>
+    <param name="location" value="dev3"/>
+    <param name="device_ip" value="192.168.1.200"/>
+    <param name="pcap" value="/home/rob/Downloads/333.pcap"/>
+    <param name="start_from_edge" value="true"/>
+  </node>
+
+
+  <node  name="rslidar_node4" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+    <param name="model" value="MEMS"/>
+    <param name="location" value="dev4"/>
+    <param name="device_ip" value="192.168.1.200"/>
+    <param name="port" value="6699"/>
+    <param name="start_from_edge" value="true"/>
+  </node>
+  
+  
+  <node pkg="rslidar_pointcloud" type="cloud_node" output="screen" name="cloud_node">
+    <param name="model" value="MEMS"/>
+    <param name="dev_list" value=""/>
+    <param name="channel_path" value="$(find rslidar_pointcloud)/data/rs_lidar_m6/ChannelNum.csv" />
+    <param name="limit_path" value="$(find rslidar_pointcloud)/data/rs_lidar_m6/limit.csv" />
+    <param name="slow_path" value="$(find rslidar_pointcloud)/data/rs_lidar_m6/real_slow_axis.csv" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find rslidar_pointcloud)/rviz_cfg/rslidar.rviz" />
+  
+  <node name="octomap_server" type="octomap_server_node" pkg="octomap_server">
+    <param name="resolution" value="0.1"/>
+    <param name="frame_id" type="string" value="rslidar"/>
+    <param name="sensor_model/max_range" value="150.0"/>
+    <param name="latch" value="true"/>
+    <param name="pointcloud_max_z" value="2"/>
+    <param name="pointcloud_min_z" value="-2"/>
+    <remap from="cloud_in" to="/combined"/>
+  </node>
+  
+  <node name="grider" type="grider" pkg="mygrid" output="screen">
+    <remap from="unGrided" to="/combined/"/>
+  </node>
+</launch>

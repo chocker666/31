@@ -1,14 +1,35 @@
 <launch>
 
-  <node  name="rslidar_node_bp" pkg="rslidar_driver_bp" type="rslidar_node_bp" output="screen" >
+  <node  name="rslidar_node_bp4" pkg="rslidar_driver_bp" type="rslidar_node_bp" output="screen" >
     <param name="model" value="RSBPEARL"/>
-    <param name="device_ip" value="192.168.1.200" />
-    <param name="msop_port" value="6699" />
-    <param name="difop_port" value="7788"/>
+    <param name="location" value="dev4"/>
+    <param name="device_ip" value="192.168.1.204" />
+    <param name="msop_port" value="7004" />
+    <param name="difop_port" value="8004"/>
     <param name="cut_angle" value="0"/>
   </node>
 
 
+  <node  name="rslidar_node_bp5" pkg="rslidar_driver_bp" type="rslidar_node_bp" output="screen" >
+    <param name="model" value="RSBPEARL"/>
+    <param name="location" value="dev5"/>
+    <param name="device_ip" value="192.168.1.205" />
+    <param name="msop_port" value="7005" />
+    <param name="difop_port" value="8005"/>
+    <param name="cut_angle" value="0"/>
+  </node>
+  
+  <node  name="rslidar_node_bp6" pkg="rslidar_driver_bp" type="rslidar_node_bp" output="screen" >
+    <param name="model" value="RSBPEARL"/>
+    <param name="location" value="dev6"/>
+    <param name="device_ip" value="192.168.1.206" />
+    <param name="msop_port" value="7006" />
+    <param name="difop_port" value="8006"/>
+    <param name="cut_angle" value="0"/>
+  </node>
+  
+  
+  
   <node  name="cloud_node_bp" pkg="rslidar_pointcloud_bp" type="cloud_node_bp" output="screen" >
     <param name="model" value="RSBPEARL"/>
     <param name="angle_path" value="$(find rslidar_pointcloud_bp)/data/rs_bpearl/angle.csv" />
@@ -18,6 +39,7 @@
     <param name="resolution_type" value="0.5cm"/>
     <param name="intensity_mode" value="3"/>
   </node>
+
 
   <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find rslidar_pointcloud_bp)/rviz_cfg/rslidar.rviz" />
   
