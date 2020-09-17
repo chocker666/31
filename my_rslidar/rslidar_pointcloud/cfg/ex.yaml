@@ -1,0 +1,12 @@
+#lidars config
+#format:lidar_name:[x y z yaw pitch roll]
+lidar0: [0,1,2,3,4,5]
+
+#T_body_lidar1: !!opencv-matrix
+#   rows: 6
+#   cols: 1
+#   dt: d
+#   data: [ 2.2805125924731939e+00, 7.1497246210235521e-01,
+#       -3.7297127017380277e-01, 5.0222799889925196e-01,
+#       2.8116600768931105e-01, -4.2637804839726362e-01 ]
+

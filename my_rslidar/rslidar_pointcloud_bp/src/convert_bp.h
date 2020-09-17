@@ -20,9 +20,7 @@
 
 
 pcl::PointCloud<pcl::PointXYZI> combined_cloud_bp;
-Eigen::Affine3f tranz_4 = Eigen::Affine3f::Identity();
-Eigen::Affine3f tranz_5 = Eigen::Affine3f::Identity();
-Eigen::Affine3f tranz_6 = Eigen::Affine3f::Identity();
+std::vector<Eigen::Affine3f> tranz_;
 
 pcl::PointCloud<pcl::PointXYZI>::Ptr dev4_points(new pcl::PointCloud<pcl::PointXYZI>);
 pcl::PointCloud<pcl::PointXYZI>::Ptr dev5_points(new pcl::PointCloud<pcl::PointXYZI>);

@@ -1,5 +1,7 @@
 <launch>
 
+  <rosparam command="load" file="$(find rslidar_pointcloud)/cfg/lidar_cfg.yaml" />
+  
   <node  name="rslidar_node1" pkg="rslidar_driver" type="rslidar_node" output="screen" >
     <param name="model" value="MEMS"/>
     <param name="pcap" value="/home/rob/Downloads/111.pcap"/>
@@ -87,8 +89,8 @@
 
 
   
-  <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find rslidar_pointcloud)/rviz_cfg/rslidar.rviz" />
-  <node name="rviz_bp" pkg="rviz" type="rviz"  args="-d $(find rslidar_pointcloud)/rviz_cfg/rslidar_bp.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz"  args="-d $(find rslidar_pointcloud)/cfg/rslidar.rviz" />
+
   
   
 </launch>

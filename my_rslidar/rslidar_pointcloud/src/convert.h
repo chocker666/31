@@ -33,23 +33,12 @@
 #include <pcl/registration/icp.h>
 
 pcl::PointCloud<pcl::PointXYZI> combined_cloud;
-Eigen::Affine3f tranz_1 = Eigen::Affine3f::Identity();
-Eigen::Affine3f tranz_2 = Eigen::Affine3f::Identity();
-Eigen::Affine3f tranz_3 = Eigen::Affine3f::Identity();
-Eigen::Affine3f tranz_4 = Eigen::Affine3f::Identity();
-Eigen::Affine3f tranz_5 = Eigen::Affine3f::Identity();
-Eigen::Affine3f tranz_6 = Eigen::Affine3f::Identity();
-Eigen::Affine3f tranz_7 = Eigen::Affine3f::Identity();
-int dev_num = 2;
-bool flag1=0,flag2=0,flag3=0,flag4=0;
+std::vector<Eigen::Affine3f> tranz_;
 
 pcl::PointCloud<pcl::PointXYZI>::Ptr dev1_points(new pcl::PointCloud<pcl::PointXYZI>);
 pcl::PointCloud<pcl::PointXYZI>::Ptr dev2_points(new pcl::PointCloud<pcl::PointXYZI>);
 pcl::PointCloud<pcl::PointXYZI>::Ptr dev3_points(new pcl::PointCloud<pcl::PointXYZI>);
 pcl::PointCloud<pcl::PointXYZI>::Ptr dev4_points(new pcl::PointCloud<pcl::PointXYZI>);
-pcl::PointCloud<pcl::PointXYZI>::Ptr dev5_points(new pcl::PointCloud<pcl::PointXYZI>);
-pcl::PointCloud<pcl::PointXYZI>::Ptr dev6_points(new pcl::PointCloud<pcl::PointXYZI>);
-pcl::PointCloud<pcl::PointXYZI>::Ptr dev7_points(new pcl::PointCloud<pcl::PointXYZI>);
 namespace rslidar_pointcloud {
     class Convert {
     public:
@@ -65,10 +54,7 @@ namespace rslidar_pointcloud {
         void processScan2(const rslidar_msgs::rslidarScan::ConstPtr &scanMsg);
         void processScan3(const rslidar_msgs::rslidarScan::ConstPtr &scanMsg);
         void processScan4(const rslidar_msgs::rslidarScan::ConstPtr &scanMsg);
-        void processScan5(const rslidar_msgs::rslidarScan::ConstPtr &scanMsg);
-        void processScan6(const rslidar_msgs::rslidarScan::ConstPtr &scanMsg);
-        void processScan7(const rslidar_msgs::rslidarScan::ConstPtr &scanMsg);
-        void combined_pubber();
+        void combined_pubber(const sensor_msgs::PointCloud2 &origin);
         ///Pointer to dynamic reconfigure service srv_
         boost::shared_ptr<dynamic_reconfigure::Server<rslidar_pointcloud::
         CloudNodeConfig> > srv_;
