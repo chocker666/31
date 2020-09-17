@@ -2,7 +2,7 @@
 
   <rosparam command="load" file="$(find rslidar_pointcloud)/cfg/lidar_cfg.yaml" />
   
-  <node  name="rslidar_node1" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+  <node  name="rslidar_node0" pkg="rslidar_driver" type="rslidar_node" output="screen" >
     <param name="model" value="MEMS"/>
     <param name="pcap" value="/home/rob/Downloads/111.pcap"/>
     <param name="location" value="dev0"/>
@@ -11,7 +11,7 @@
   </node>
   
 
-  <node  name="rslidar_node2" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+  <node  name="rslidar_node1" pkg="rslidar_driver" type="rslidar_node" output="screen" >
     <param name="model" value="MEMS"/>
     <param name="location" value="dev1"/>
     <param name="device_ip" value="192.168.1.200"/>
@@ -20,7 +20,7 @@
   </node>
 
 
-  <node  name="rslidar_node3" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+  <node  name="rslidar_node2" pkg="rslidar_driver" type="rslidar_node" output="screen" >
     <param name="model" value="MEMS"/>
     <param name="location" value="dev2"/>
     <param name="device_ip" value="192.168.1.200"/>
@@ -29,7 +29,7 @@
   </node>
 
 
-  <node  name="rslidar_node4" pkg="rslidar_driver" type="rslidar_node" output="screen" >
+  <node  name="rslidar_node3" pkg="rslidar_driver" type="rslidar_node" output="screen" >
     <param name="model" value="MEMS"/>
     <param name="location" value="dev3"/>
     <param name="device_ip" value="192.168.1.200"/>
